@@ -1,9 +1,9 @@
-@use 'var';
-@use 'overwrites';
+@import 'var';
+@import 'overwrites';
 
 .App {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  // height: 100%;
+  font-family: $basic;
 }

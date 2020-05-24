@@ -1,6 +1,5 @@
 import React from 'react';
-import clsx from 'clsx';
-
+// import clsx from 'clsx';
 import './scss/App.scss';
 import Navigation from './components/Navigation'
 import { Switch, Route, useLocation } from "react-router-dom";
@@ -14,31 +13,20 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
             flexGrow: 1,
-            transition: 'background-color .2s ease-in-out',
-        },
-        home: {
-            backgroundColor: '#B8B8AA',
-        },
-        users: {
-            backgroundColor: '#CFC0BD',
-        },
-        posts: {
-            backgroundColor: '#DDD5D0',
+            display: 'flex',
+            backgroundColor: '#DDD5D0'
         },
     }),
 );
 
 function App() {
-    const location = useLocation();
     const classes = useStyles();
-  return (
+    let location = useLocation();
+
+    return (
     <div className="App">
-      <Navigation />
-      {/*<main>*/}
-      <Container maxWidth={false} className={clsx(classes.container, {
-          [classes.users]: location.pathname === '/users',
-          [classes.home]: location.pathname === '/'
-      })}>
+      <Navigation showSearch={location.pathname === '/posts'} />
+      <Container maxWidth={false} className={classes.container}>
           <Switch>
             <Route path="/users">
               <Users />
@@ -51,9 +39,8 @@ function App() {
             </Route>
           </Switch>
       </Container>
-      {/*</main>*/}
     </div>
-  );
-}
+    );
+    }
 
 export default App;

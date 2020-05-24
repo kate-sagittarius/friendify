@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import clsx from 'clsx';
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,10 +10,12 @@ import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import PeopleAltRoundedIcon from '@material-ui/icons/PeopleAltRounded';
+import ChatRoundedIcon from '@material-ui/icons/ChatRounded';
 import MoreIcon from '@material-ui/icons/MoreVert';
+// import LogoImg from '../../public/images/logo.png';
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -27,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.up('sm')]: {
                 display: 'block',
             },
+            fontFamily: "'Black Ops One', cursive",
         },
         search: {
             position: 'relative',
@@ -77,15 +81,29 @@ const useStyles = makeStyles((theme: Theme) =>
                 display: 'none',
             },
         },
+        invisible: {
+            display: 'none',
+        },
+        friendify: {
+          display: 'flex',
+        },
+        logo: {
+            marginRight: 12,
+            width: 30,
+            height: 30,
+        },
     }),
 );
 
-export default function PrimarySearchAppBar() {
+type PrimarySearchAppBarProps = {
+    showSearch?: boolean;
+}
+
+export default function PrimarySearchAppBar(props: PrimarySearchAppBarProps) {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
-    // const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -95,11 +113,6 @@ export default function PrimarySearchAppBar() {
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
     };
-
-    // const handleMenuClose = () => {
-    //     setAnchorEl(null);
-    //     handleMobileMenuClose();
-    // };
 
     const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMobileMoreAnchorEl(event.currentTarget);
@@ -121,7 +134,7 @@ export default function PrimarySearchAppBar() {
             <Link to="/">
                 <MenuItem>
                     <IconButton aria-label="show 4 new mails" color="inherit">
-                        <MailIcon />
+                        <HomeRoundedIcon />
                     </IconButton>
                     <p>Messages</p>
                 </MenuItem>
@@ -129,7 +142,7 @@ export default function PrimarySearchAppBar() {
             <Link to="/users">
                 <MenuItem>
                     <IconButton aria-label="show 11 new notifications" color="inherit">
-                        <NotificationsIcon />
+                        <PeopleAltRoundedIcon />
                     </IconButton>
                     <p>Notifications</p>
                 </MenuItem>
@@ -142,7 +155,7 @@ export default function PrimarySearchAppBar() {
                         aria-haspopup="true"
                         color="inherit"
                     >
-                        <AccountCircle />
+                        <ChatRoundedIcon />
                     </IconButton>
                     <p>Profile</p>
                 </MenuItem>
@@ -155,11 +168,19 @@ export default function PrimarySearchAppBar() {
             <AppBar position="sticky">
                 <Toolbar>
                     <Link to="/">
-                        <Typography className={classes.title} variant="h6" noWrap>
-                            Friendify
-                        </Typography>
+                        <div className={classes.friendify}>
+                            <img
+                                src={process.env.PUBLIC_URL + '/images/logo.png'}
+                                alt={'Chat'}
+                                title={'Chat'}
+                                className={classes.logo}
+                            />
+                            <Typography className={classes.title} variant="h6" noWrap>
+                                Friendify
+                            </Typography>
+                        </div>
                     </Link>
-                    <div className={classes.search}>
+                    <div className={clsx(classes.search, {[classes.invisible]: !props.showSearch})}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
@@ -176,12 +197,12 @@ export default function PrimarySearchAppBar() {
                     <div className={classes.sectionDesktop}>
                         <Link to="/">
                             <IconButton aria-label="show 4 new mails" color="inherit">
-                                <MailIcon />
+                                <HomeRoundedIcon />
                             </IconButton>
                         </Link>
                         <Link to="/users">
                             <IconButton aria-label="show 17 new notifications" color="inherit">
-                                <NotificationsIcon />
+                                <PeopleAltRoundedIcon />
                             </IconButton>
                         </Link>
                         <Link to="/posts">
@@ -193,7 +214,7 @@ export default function PrimarySearchAppBar() {
                                 onClick={handleProfileMenuOpen}
                                 color="inherit"
                             >
-                                <AccountCircle />
+                                <ChatRoundedIcon />
                             </IconButton>
                         </Link>
                     </div>

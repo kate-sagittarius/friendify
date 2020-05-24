@@ -1,25 +1,38 @@
 import React from 'react';
-import {createStyles, fade, makeStyles, Theme} from "@material-ui/core/styles";
+import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import Gallery from './Gallery';
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        'main-container': {
-            // height: '100%',
-            // width: '100%',
+        root: {
             flexGrow: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            [theme.breakpoints.down('sm')]: {
+                justifyContent: 'flex-start',
+            },
         },
-        home: {
-            backgroundColor: '#B8B8AA',
+        heading: {
+            color: '#7F9183',
+            margin: '36px 0',
+            textAlign: 'center',
         },
     }),
 );
 
 export default function Home() {
     const classes = useStyles();
+    // const [elevation, setElevation] = React.useState(1);
 
     return (
-        <div className={`${classes['main-container']} ${classes.home}`}>
-
-        </div>
+        <Container className={classes.root} maxWidth={'md'}>
+            <h1 className={classes.heading}>Welcome to Friendify</h1>
+            <div>
+                <Gallery />
+            </div>
+        </Container>
     );
 }
