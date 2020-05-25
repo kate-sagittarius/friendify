@@ -139,7 +139,7 @@ function Navigation(props: PrimarySearchAppBarProps) {
                     <IconButton aria-label="show 4 new mails" color="inherit">
                         <HomeRoundedIcon />
                     </IconButton>
-                    <p>Messages</p>
+                    <p>Home</p>
                 </MenuItem>
             </Link>
             <Link to="/users">
@@ -147,7 +147,7 @@ function Navigation(props: PrimarySearchAppBarProps) {
                     <IconButton aria-label="show 11 new notifications" color="inherit">
                         <PeopleAltRoundedIcon />
                     </IconButton>
-                    <p>Notifications</p>
+                    <p>Users</p>
                 </MenuItem>
             </Link>
             <Link to="/posts">
@@ -160,7 +160,7 @@ function Navigation(props: PrimarySearchAppBarProps) {
                     >
                         <ChatRoundedIcon />
                     </IconButton>
-                    <p>Profile</p>
+                    <p>Posts</p>
                 </MenuItem>
             </Link>
         </Menu>

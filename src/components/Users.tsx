@@ -27,7 +27,10 @@ const useStyles = makeStyles((theme: Theme) =>
             bottom: 20,
             right: 20,
             width: '30%',
-        }
+        },
+        loader: {
+            width: '80%',
+        },
     }),
 );
 
@@ -54,7 +57,7 @@ function Users({ users, setUsers }: any) {
                         />
                     </Grid>
                 ))
-                : <LinearProgress color="secondary" />}
+                : <LinearProgress color="secondary" className={classes.loader} />}
             <img
                 src={process.env.PUBLIC_URL + '/images/plant2.svg'}
                 alt={'Plant'}
