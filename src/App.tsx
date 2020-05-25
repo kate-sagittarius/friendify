@@ -25,7 +25,7 @@ function App() {
 
     return (
     <div className="App">
-      <Navigation showSearch={location.pathname === '/posts'} />
+      <Navigation showSearch={location.pathname === '/users'} />
       <Container maxWidth={false} className={classes.container}>
           <Switch>
             <Route path="/users">
@@ -41,6 +41,6 @@ function App() {
       </Container>
     </div>
     );
-    }
+}
 
 export default App;

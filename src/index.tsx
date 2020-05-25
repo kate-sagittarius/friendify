@@ -7,13 +7,20 @@ import {BrowserRouter as Router} from "react-router-dom";
 import { ThemeProvider } from '@material-ui/styles';
 import { theme } from './utils/theme';
 
+import { Provider as ReduxProvider } from 'react-redux';
+import { createStore } from './store/store';
+
+const store = createStore();
+
 ReactDOM.render(
   <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <Router>
-            <App />
-        </Router>
-      </ThemeProvider>
+      <ReduxProvider store={store}>
+          <ThemeProvider theme={theme}>
+              <Router>
+                  <App />
+              </Router>
+          </ThemeProvider>
+      </ReduxProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

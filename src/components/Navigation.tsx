@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 import clsx from 'clsx';
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,7 +15,7 @@ import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import PeopleAltRoundedIcon from '@material-ui/icons/PeopleAltRounded';
 import ChatRoundedIcon from '@material-ui/icons/ChatRounded';
 import MoreIcon from '@material-ui/icons/MoreVert';
-// import LogoImg from '../../public/images/logo.png';
+import { setQuery } from '../store/reducers/searchQuery';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -97,9 +98,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type PrimarySearchAppBarProps = {
     showSearch?: boolean;
+    query: string;
+    onSearch: (query: string) => void;
 }
 
-export default function PrimarySearchAppBar(props: PrimarySearchAppBarProps) {
+function Navigation(props: PrimarySearchAppBarProps) {
     const classes = useStyles();
     const [, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -191,6 +194,8 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarProps) {
                                 input: classes.inputInput,
                             }}
                             inputProps={{ 'aria-label': 'search' }}
+                            value={props.query}
+                            onChange={(event) => props.onSearch(event.target.value)}
                         />
                     </div>
                     <div className={classes.grow} />
@@ -235,3 +240,17 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarProps) {
         </div>
     );
 }
+
+const mapStateToProps = (state: any) => {
+    return {
+        query: state.query,
+    };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        onSearch: (query: string) => dispatch(setQuery(query)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
