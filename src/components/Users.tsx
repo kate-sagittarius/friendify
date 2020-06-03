@@ -47,9 +47,8 @@ function Users({ users, setUsers }: any) {
         <Grid container spacing={2} className={classes.root}>
             { users
                 ? users.map((user: any, index: number) => (
-                    <Grid container item spacing={2} xs={3} className={classes.item}>
+                    <Grid container item spacing={2} xs={3} className={classes.item} key={user.id}>
                         <User
-                            key={index}
                             name={user.name}
                             index={index}
                             email={user.email}
